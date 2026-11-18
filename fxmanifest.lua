@@ -7,7 +7,7 @@ description 'Registers ONX CVP/EVP vehicle packs into the WHIPFX Vehicle catalog
 version '1.0.0'
 
 dependency 'whip_core'
-whip_requires '1.0'
+whip_requires '1.0.1'
 
 shared_scripts {
     '@whip_core/lib/satellite.lua',

@@ -19,7 +19,7 @@ Repository: https://github.com/fear0911fivem/whip_onx_vehicles
 
 ```bash
 cd resources
-git clone https://github.com/OkanFeNwa/whip_onx_vehicles.git
+git clone https://github.com/fear0911fivem/whip_onx_vehicles.git
 ```
 
 Or unzip a release so the folder is named `whip_onx_vehicles`.
@@ -55,12 +55,13 @@ On a successful start you should see:
 
 - `dependency 'whip_core'` and `@whip_core/lib/satellite.lua` are already in the manifest.
 - No edits to `whip_core` are required.
+- Catalog pictures live in `images/` and are already wired. See **[install.md](install.md)** for the WHIP image rules and the ready `fxmanifest.lua` / row snippets.
 
 ## What it does
 
 On start, inside `Whip.register`:
 
-1. **`RegisterVehicles`** — pushes the list in `vehicles.lua` into WHIP’s catalog (`model`, `name`, `class`).
+1. **`RegisterVehicles`** — pushes the list in `vehicles.lua` into WHIP’s catalog (`model`, `name`, `class`, `image`).
 2. **`SetVehiclePrices`** — sets a class-based dollar value for each model (used by `/whip` Banks for owned-vehicle valuation).
 
 When you stop the resource, WHIP drops that pack’s catalog entries and prices again.
@@ -72,15 +73,16 @@ When you stop the resource, WHIP drops that pack’s catalog entries and prices 
 Edit `vehicles.lua`. Each row is:
 
 ```lua
-{ model = 'onx_alamo', name = 'Alamo 2600LX', class = 'suvs' },
+{ model = 'onx_alamo', name = 'Alamo 2600LX', class = 'suvs', image = 'images/onx_alamo.webp' },
 ```
 
 - `model` — spawn name (must match the ONX stream pack)
 - `name` — catalog display name
 - `class` — one of WHIP’s class names:  
   `compacts`, `sedans`, `suvs`, `coupes`, `muscle`, `sportsclassics`, `sports`, `super`, `motorcycles`, `offroad`, `industrial`, `utility`, `vans`, `boats`, `helicopters`, `planes`, `service`, `emergency`, `military`, `commercial`, `trains`, `openwheel`
+- `image` — path inside this resource (must also be covered by `files { 'images/*.webp' }` in `fxmanifest.lua`)
 
-Only include models you actually stream. A model that is not in-game will show as not available in the catalog (`inGame == false`).
+Only include models you actually stream. A model that is not in-game will show as not available in the catalog (`inGame == false`). Put the matching `.webp` in `images/` when you add a row.
 
 ### Change prices
 
@@ -90,9 +92,11 @@ Default prices by class live at the top of `server/main.lua` (`CLASS_PRICE`). Un
 
 | File | Role |
 | --- | --- |
-| `fxmanifest.lua` | WHIP satellite manifest (`whip_requires '1.0'`) |
-| `vehicles.lua` | Full ONX model list (`OnxVehicles`) |
+| `fxmanifest.lua` | WHIP satellite manifest + `files { 'images/*.webp' }` |
+| `vehicles.lua` | Full ONX model list (`OnxVehicles`) with `image` paths |
 | `server/main.lua` | `RegisterVehicles` + `SetVehiclePrices` |
+| `images/` | Catalog pictures (`<model>.webp`) |
+| `install.md` | Image wiring guide for WHIPFX / Discord installs |
 
 ## Support
 

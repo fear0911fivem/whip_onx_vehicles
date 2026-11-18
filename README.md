@@ -6,7 +6,7 @@ This resource does **not** stream vehicle models. You still need the official ON
 
 Community resource for the [WHIPFX Discord](https://whipfx.net/). Not an official WHIPFX release.
 
-Repository: https://github.com/OkanFeNwa/whip_onx_vehicles
+Repository: https://github.com/fear0911fivem/whip_onx_vehicles
 
 ## Requirements
 
